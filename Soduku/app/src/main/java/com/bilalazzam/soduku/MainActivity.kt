@@ -9,7 +9,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import android.os.Bundle
@@ -19,7 +18,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.DropdownMenu
@@ -27,12 +25,11 @@ import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import com.bilalazzam.soduku.ui.theme.SodukuTheme
+import com.bilalazzam.soduku.ui.theme.SudokuTheme
 import kotlin.math.sqrt
 
 class MainActivity : ComponentActivity() {
@@ -40,7 +37,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            SodukuTheme {
+            SudokuTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     SudokuGame(
                         modifier = Modifier
@@ -128,7 +125,7 @@ fun SudokuGame(modifier: Modifier = Modifier) {
         ) {
             Button(
                 onClick = {
-                    dialogMessage = if (Sudoku.isValidSudoku(boardState)) {
+                    dialogMessage = if (SudokuImpl.isValidSudoku(boardState)) {
                         "Valid Sudoku"
                     } else {
                         "InValid Sudoku!"
@@ -143,7 +140,7 @@ fun SudokuGame(modifier: Modifier = Modifier) {
 
             Button(
                 onClick = {
-                    dialogMessage = if (Sudoku.isSolved(boardState)) {
+                    dialogMessage = if (SudokuImpl.isSolved(boardState)) {
                         "Congratulations"
                     } else {
                         "Unfortnatly, You lose!"
