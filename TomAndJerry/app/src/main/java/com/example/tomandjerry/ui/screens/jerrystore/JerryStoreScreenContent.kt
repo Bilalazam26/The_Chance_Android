@@ -65,12 +65,6 @@ fun JerryStoreScreenContent(modifier: Modifier = Modifier) {
             ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        JerryStoreAppBar(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(56.dp)
-        )
-
         Spacer(modifier = Modifier.height(12.dp))
         JerryStoreSearchBarContainer()
         Spacer(modifier = Modifier.height(8.dp))

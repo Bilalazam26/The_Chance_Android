@@ -1,5 +1,6 @@
 package com.example.tomandjerry.ui.core
 
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -35,7 +36,9 @@ fun IconTextRow(
     textColor: Color = White.copy(alpha = .87f),
     iconContainerColor: Color = Transparent,
     iconTint: Color = White,
-    iconContainerSize: Dp = 24.dp
+    iconContainerSize: Dp = 24.dp,
+    iconWidth: Dp = 32.dp,
+    iconHeight: Dp = 32.dp
 ) {
     Row(
         modifier = modifier,
@@ -59,7 +62,7 @@ fun IconTextRow(
                 contentDescription = "Tom Icon",
                 tint = iconTint,
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(iconWidth, iconHeight)
             )
         }
 

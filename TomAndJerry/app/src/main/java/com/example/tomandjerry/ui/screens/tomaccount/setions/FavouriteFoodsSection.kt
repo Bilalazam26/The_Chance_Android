@@ -37,7 +37,9 @@ fun FavouriteFoodsSection(modifier: Modifier = Modifier) {
             textColor = Color(0xDE1F1F1E),
             iconContainerColor = White,
             iconTint = Color(0xFF1F1F1E),
-            iconContainerSize = 40.dp
+            iconContainerSize = 40.dp,
+            iconWidth = 21.5.dp,
+            iconHeight = 20.5.dp
         )
 
 
@@ -50,7 +52,9 @@ fun FavouriteFoodsSection(modifier: Modifier = Modifier) {
             textColor = Color(0xDE1F1F1E),
             iconContainerColor = White,
             iconTint = Color(0xFF1F1F1E),
-            iconContainerSize = 40.dp
+            iconContainerSize = 40.dp,
+            iconWidth = 21.5.dp,
+            iconHeight = 17.5.dp
         )
 
         IconTextRow(
@@ -62,7 +66,9 @@ fun FavouriteFoodsSection(modifier: Modifier = Modifier) {
             textColor = Color(0xDE1F1F1E),
             iconContainerColor = White,
             iconTint = Color(0xFF1F1F1E),
-            iconContainerSize = 40.dp
+            iconContainerSize = 40.dp,
+            iconWidth = 21.5.dp,
+            iconHeight = 21.5.dp
         )
     }
 }

@@ -22,7 +22,7 @@ fun TomSettingsSection(modifier: Modifier = Modifier) {
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
-            text = "Settings",
+            text = "Tom Settings",
             style = MaterialTheme.typography.titleMedium,
             color = Color(0xDE1F1F1E)
         )
@@ -36,7 +36,9 @@ fun TomSettingsSection(modifier: Modifier = Modifier) {
             textColor = Color(0xDE1F1F1E),
             iconContainerColor = White,
             iconTint = Color(0xFF1F1F1E),
-            iconContainerSize = 40.dp
+            iconContainerSize = 40.dp,
+            iconWidth = 21.5.dp,
+            iconHeight = 19.5.dp
         )
 
 
@@ -49,7 +51,9 @@ fun TomSettingsSection(modifier: Modifier = Modifier) {
             textColor = Color(0xDE1F1F1E),
             iconContainerColor = White,
             iconTint = Color(0xFF1F1F1E),
-            iconContainerSize = 40.dp
+            iconContainerSize = 40.dp,
+            iconWidth = 21.5.dp,
+            iconHeight = 16.5.dp
         )
 
         IconTextRow(
@@ -61,7 +65,9 @@ fun TomSettingsSection(modifier: Modifier = Modifier) {
             textColor = Color(0xDE1F1F1E),
             iconContainerColor = White,
             iconTint = Color(0xFF1F1F1E),
-            iconContainerSize = 40.dp
+            iconContainerSize = 40.dp,
+            iconWidth = 17.5.dp,
+            iconHeight = 21.5.dp
         )
     }
 

@@ -47,7 +47,6 @@ fun DetailsSection(modifier: Modifier = Modifier) {
                 text = "Temperature",
                 modifier = Modifier
                     .weight(1f)
-                    .size(componentWidth)
             )
 
             DetailsItem(
@@ -56,7 +55,6 @@ fun DetailsSection(modifier: Modifier = Modifier) {
                 text = "Time",
                 modifier = Modifier
                     .weight(1f)
-                    .size(componentWidth)
             )
 
             DetailsItem(
@@ -65,7 +63,6 @@ fun DetailsSection(modifier: Modifier = Modifier) {
                 text = "N0. of deaths",
                 modifier = Modifier
                     .weight(1f)
-                    .size(componentWidth)
             )
         }
     }

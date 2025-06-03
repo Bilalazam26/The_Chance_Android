@@ -8,6 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.tomandjerry.ui.model.PreparationStep
 import com.example.tomandjerry.ui.screens.tomkitchen.electrictompasta.components.PreparationStepItem
@@ -55,7 +56,8 @@ fun PreparationMethodSection(modifier: Modifier = Modifier) {
     ) {
         Text(
             text = "Preparation Method",
-            style = MaterialTheme.typography.bodyLarge
+            style = MaterialTheme.typography.bodyLarge,
+            color = Color(0xDE1F1F1E)
         )
 
         preparationSteps.forEach { step ->

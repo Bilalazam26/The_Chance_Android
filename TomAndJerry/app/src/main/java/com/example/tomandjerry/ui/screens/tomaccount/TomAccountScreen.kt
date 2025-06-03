@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tomandjerry.ui.screens.tomaccount.components.headerbackground.HeaderBackground
@@ -21,15 +22,17 @@ fun TomAccountScreen(modifier: Modifier = Modifier) {
     Box(
         modifier = modifier
             .fillMaxSize()
+            .clipToBounds()
     ) {
-        TomAccountBackground()
 
-        /*HeaderBackground(
+        HeaderBackground(
             modifier = Modifier
                 .fillMaxWidth()
                 .align(Alignment.TopCenter)
                 .offset(y = (-38).dp)
-        )*/
+        )
+
+        //TomAccountBackground()
 
         Column(
             modifier = Modifier

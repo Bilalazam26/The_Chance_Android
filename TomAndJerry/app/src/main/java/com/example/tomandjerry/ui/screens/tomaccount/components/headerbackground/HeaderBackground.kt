@@ -30,18 +30,18 @@ fun HeaderBackground(modifier: Modifier = Modifier) {
 
         val gradientBrush1 = Brush.linearGradient(
             colors = listOf(
-                White.copy(alpha = 0.1f),
+                White.copy(alpha = 0.41f),
                 Transparent
             ),
-            start = Offset(width, height),
-            end = Offset(0f, 0f)
+            start = Offset(width * 1.2f, height * 1.5f),
+            end = Offset(width * .3f, 0f)
         )
         val gradientBrush2 = Brush.linearGradient(
             colors = listOf(
-                White.copy(alpha = 0.1f),
+                White.copy(alpha = 0.41f),
                 Transparent
             ),
-            start = Offset(width, height),
+            start = Offset(width * .63f, height * 3.2f),
             end = Offset(0f, 0f)
         )
 
@@ -64,13 +64,13 @@ fun HeaderBackground(modifier: Modifier = Modifier) {
 
         drawRect(color = backgroundColor)
         drawPath(
-            path = path2,
-            brush = gradientBrush2,
+            path = path1,
+            brush = gradientBrush1,
             style = Fill
         )
         drawPath(
-            path = path1,
-            brush = gradientBrush1,
+            path = path2,
+            brush = gradientBrush2,
             style = Fill
         )
     }

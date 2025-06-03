@@ -63,7 +63,7 @@ fun DonutDetailsScreen(
             contentScale = Fit,
             modifier = Modifier
                 .padding(horizontal = 64.dp)
-                .padding(top = 32.dp)
+                .padding(top = 48.dp)
                 .fillMaxWidth()
                 .fillMaxHeight(.35f)
                 .align(TopCenter)

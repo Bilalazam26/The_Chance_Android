@@ -37,17 +37,17 @@ class MainActivity : ComponentActivity() {
                             .padding(innerPadding)
                     )*/
 
-                    /*TomAccountScreen(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .padding(innerPadding)
-                    )*/
-
-                    SecretEpisodesScreen(
+                    TomAccountScreen(
                         modifier = Modifier
                             .fillMaxSize()
                             .padding(innerPadding)
                     )
+
+                    /*SecretEpisodesScreen(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding)
+                    )*/
                 }
             }
         }
