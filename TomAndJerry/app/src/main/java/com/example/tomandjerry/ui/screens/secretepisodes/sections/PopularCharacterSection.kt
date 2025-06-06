@@ -2,6 +2,7 @@ package com.example.tomandjerry.ui.screens.secretepisodes.sections
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -48,15 +49,15 @@ fun PopularCharacterSection(modifier: Modifier = Modifier) {
     )
     Column(
         modifier = modifier
-            .fillMaxWidth()
-            .padding(start = 16.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         Text(
             text = "Popular Character",
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .padding(start = 16.dp),
             color = Color(0xDE1F1F1E),
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.bodyLarge.copy(
@@ -70,6 +71,7 @@ fun PopularCharacterSection(modifier: Modifier = Modifier) {
         LazyRow(
             modifier = Modifier,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
         ) {
             items(popularCharacters) {
                 PopularCharacterItem(

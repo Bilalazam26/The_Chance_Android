@@ -2,6 +2,7 @@ package com.example.tomandjerry.ui.screens.secretepisodes.sections
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -44,7 +45,7 @@ fun MostWatchedSection(modifier: Modifier = Modifier) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(end = 16.dp),
+                .padding(horizontal = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
@@ -71,6 +72,7 @@ fun MostWatchedSection(modifier: Modifier = Modifier) {
         LazyRow(
             modifier = Modifier,
             horizontalArrangement = Arrangement.spacedBy(12.dp),
+            contentPadding = PaddingValues(start = 16.dp, end = 16.dp),
         ) {
             items(mostWatchedList) {
                 MostWatchedItem(
