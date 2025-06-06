@@ -43,10 +43,13 @@ fun SecretEpisodesScreen(modifier: Modifier = Modifier) {
                             )
                         )
                     )
-                    .padding(top = 16.dp, start = 16.dp, bottom = 24.dp),
+                    .padding(top = 16.dp,bottom = 24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                SecretEpisodesHeader()
+                SecretEpisodesHeader(
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                )
                 MostWatchedSection()
             }
             PopularCharacterSection()
