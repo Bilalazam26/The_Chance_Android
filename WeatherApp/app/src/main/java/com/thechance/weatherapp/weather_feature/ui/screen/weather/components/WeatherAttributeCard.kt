@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -29,6 +30,7 @@ fun WeatherAttributeCard(
 ) {
     Box(
         modifier = modifier
+            .aspectRatio(.93f)
             .clip(MaterialTheme.shapes.large)
             .background(
                 MaterialTheme.colorScheme.surface.copy(alpha = .7f)
