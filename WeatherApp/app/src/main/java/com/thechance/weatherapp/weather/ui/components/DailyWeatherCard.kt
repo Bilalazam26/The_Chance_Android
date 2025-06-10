@@ -18,8 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.TopCenter
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.BlurEffect
 import androidx.compose.ui.graphics.Color.Companion.Transparent
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.thechance.weatherapp.core.ui.utils.weatherConditionToImage
@@ -28,9 +31,13 @@ import com.thechance.weatherapp.weather.domain.weather.model.DailyWeatherData
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun DailyWeatherCard(modifier: Modifier = Modifier, dailyWeather: DailyWeatherData) {
+    val blurColor = MaterialTheme.colorScheme.surfaceVariant
+    val density = LocalDensity.current
+
     Box(
         modifier = modifier
             .fillMaxWidth()
+            .height(69.dp)
             .padding(vertical = 12.dp),
     ) {
         Text(
@@ -41,25 +48,22 @@ fun DailyWeatherCard(modifier: Modifier = Modifier, dailyWeather: DailyWeatherDa
                 .align(Alignment.CenterStart)
         )
 
-        Box(
+
+        Image(
+            painter = painterResource(id = weatherConditionToImage(dailyWeather.condition)),
+            contentDescription = dailyWeather.condition,
+            contentScale = ContentScale.Fit,
             modifier = Modifier
-                .shadow(
-                    elevation = 150.dp,
-                    spotColor = MaterialTheme.colorScheme.surfaceVariant,
-                    ambientColor = MaterialTheme.colorScheme.surfaceVariant,
+                .graphicsLayer {
+                    spotShadowColor = blurColor
+                    ambientShadowColor = blurColor
                     shape = CircleShape
-                )
+                    shadowElevation = with(density) { 150.dp.toPx() }
+                }
+                .height(45.dp)
                 .align(Alignment.Center)
-        ) {
-            Image(
-                painter = painterResource(id = weatherConditionToImage(dailyWeather.condition)),
-                contentDescription = dailyWeather.condition,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .height(45.dp)
-                    .align(Alignment.Center)
-            )
-        }
+        )
+
 
         MinMaxTempContainer(
             minTemp = dailyWeather.minTemperature,
