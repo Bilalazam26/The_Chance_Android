@@ -24,7 +24,11 @@ import com.thechance.weatherapp.weather_feature.domain.weather.model.DailyWeathe
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun DailyWeatherCard(modifier: Modifier = Modifier, dailyWeather: DailyWeatherData) {
+fun DailyWeatherCard(
+    modifier: Modifier = Modifier,
+    dailyWeather: DailyWeatherData,
+    isDay: Boolean
+) {
     val blurColor = MaterialTheme.colorScheme.surfaceVariant
     val density = LocalDensity.current
 
@@ -44,7 +48,7 @@ fun DailyWeatherCard(modifier: Modifier = Modifier, dailyWeather: DailyWeatherDa
 
 
         Image(
-            painter = painterResource(id = weatherConditionToImage(dailyWeather.condition)),
+            painter = painterResource(id = weatherConditionToImage(dailyWeather.condition, isDay)),
             contentDescription = dailyWeather.condition,
             contentScale = ContentScale.Fit,
             modifier = Modifier

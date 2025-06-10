@@ -9,11 +9,11 @@ import io.ktor.client.call.NoTransformationFoundException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 
-suspend inline fun <reified  T> responseToResult(
+suspend inline fun <reified T> responseToResult(
     response: HttpResponse
 ): Result<T> {
     return when (response.status.value) {
-        in 200 .. 299 -> { //success
+        in 200..299 -> { //success
             try {
                 Result.success(response.body<T>())
             } catch (_: NoTransformationFoundException) {
@@ -29,9 +29,10 @@ suspend inline fun <reified  T> responseToResult(
             Result.failure(TooManyRequestsException())
         }
 
-        in 500 ..599 -> { //server side error
+        in 500..599 -> { //server side error
             Result.failure(ServerException())
         }
+
         else -> Result.failure(UnknownException())
     }
 }

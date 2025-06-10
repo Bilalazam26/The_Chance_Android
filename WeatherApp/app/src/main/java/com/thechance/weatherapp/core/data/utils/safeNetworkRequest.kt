@@ -6,7 +6,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.util.network.UnresolvedAddressException
 import kotlinx.serialization.SerializationException
 
-suspend inline fun <reified T> safeNetworkRequest (
+suspend inline fun <reified T> safeNetworkRequest(
     execute: () -> HttpResponse
 ): Result<T> {
     val response = try {

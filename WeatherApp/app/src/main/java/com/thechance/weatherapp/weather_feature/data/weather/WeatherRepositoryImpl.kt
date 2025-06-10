@@ -28,9 +28,10 @@ class WeatherRepositoryImpl(
         locationCoordinate: LocationCoordinate,
         endDate: LocalDate
     ): Result<List<HourlyWeatherData>> {
-        return remoteWeatherDataSource.getHourlyWeatherData(locationCoordinate, endDate.toDate()).map {
-            it.toList()
-        }
+        return remoteWeatherDataSource.getHourlyWeatherData(locationCoordinate, endDate.toDate())
+            .map {
+                it.toList()
+            }
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

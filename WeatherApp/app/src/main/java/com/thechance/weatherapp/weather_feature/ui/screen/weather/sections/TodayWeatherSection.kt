@@ -22,14 +22,15 @@ import com.thechance.weatherapp.weather_feature.ui.screen.weather.components.Hou
 @Composable
 fun TodayWeatherSection(
     todayWeather: List<HourlyWeatherData>,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isDay: Boolean
 ) {
-    Column (
+    Column(
         modifier = modifier
             .fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalAlignment = Alignment.Start
-    ){
+    ) {
         Text(
             text = "Today",
             style = MaterialTheme.typography.headlineSmall,
@@ -38,14 +39,15 @@ fun TodayWeatherSection(
                 .padding(start = 16.dp)
         )
 
-        LazyRow (
+        LazyRow(
             modifier = Modifier.fillMaxWidth(),
             contentPadding = PaddingValues(horizontal = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ){
+        ) {
             items(todayWeather) {
                 HourlyWeatherCard(
-                    hourlyWeather = it
+                    hourlyWeather = it,
+                    isDay = isDay
                 )
             }
         }

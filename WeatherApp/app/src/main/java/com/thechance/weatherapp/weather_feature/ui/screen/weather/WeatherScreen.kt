@@ -200,7 +200,12 @@ fun WeatherScreen(
                         }
 
                         Image(
-                            painter = painterResource(id = weatherConditionToImage(currentWeather.condition)),
+                            painter = painterResource(
+                                id = weatherConditionToImage(
+                                    currentWeather.condition,
+                                    currentWeather.isDay
+                                )
+                            ),
                             contentDescription = currentWeather.condition,
                             contentScale = ContentScale.Fit,
                             modifier = Modifier
@@ -309,20 +314,21 @@ fun WeatherScreen(
                         TodayWeatherSection(
                             modifier = Modifier
                                 .fillMaxWidth(),
-                            todayWeather = hourlyWeather
+                            todayWeather = hourlyWeather,
+                            isDay = currentWeather.isDay
                         )
 
                         NextWeekWeatherSection(
                             dailyWeather = dailyWeather,
                             modifier = Modifier
-                                .fillMaxWidth()
+                                .fillMaxWidth(),
+                            isDay = currentWeather.isDay
                         )
                     }
                 }
             }
         }
     }
-
 
 
 }

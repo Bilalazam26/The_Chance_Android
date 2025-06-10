@@ -31,6 +31,7 @@ fun CurrentWeatherDto.toCurrentWeatherData(): CurrentWeatherData {
 fun CurrentWeatherResponse.toCurrentWeatherDto(): CurrentWeatherDto {
     return this.current
 }
+
 fun HourlyWeatherResponse.toHourlyWeatherDto(): HourlyWeatherDto {
     return this.hourly
 }

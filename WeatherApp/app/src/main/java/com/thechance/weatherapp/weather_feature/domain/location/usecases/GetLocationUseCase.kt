@@ -6,5 +6,6 @@ import com.thechance.weatherapp.weather_feature.domain.location.model.LocationCo
 class GetLocationUseCase(
     private val locationProvider: LocationProvider
 ) {
-    suspend operator fun invoke(): Result<LocationCoordinate> = locationProvider.getCurrentLocation()
+    suspend operator fun invoke(): Result<LocationCoordinate> =
+        locationProvider.getCurrentLocation()
 }

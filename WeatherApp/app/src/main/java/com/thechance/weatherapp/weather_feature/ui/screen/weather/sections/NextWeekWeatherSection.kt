@@ -22,7 +22,11 @@ import com.thechance.weatherapp.weather_feature.ui.screen.weather.components.Dai
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
-fun NextWeekWeatherSection(modifier: Modifier = Modifier, dailyWeather: List<DailyWeatherData>) {
+fun NextWeekWeatherSection(
+    modifier: Modifier = Modifier,
+    dailyWeather: List<DailyWeatherData>,
+    isDay: Boolean
+) {
 
     Column(
         modifier = modifier
@@ -61,7 +65,8 @@ fun NextWeekWeatherSection(modifier: Modifier = Modifier, dailyWeather: List<Dai
                         dailyWeather = dailyWeatherData,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp)
+                            .padding(start = 16.dp),
+                        isDay = isDay
                     )
                     if (index < dailyWeather.size - 1) {
                         HorizontalDivider(

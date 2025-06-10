@@ -31,7 +31,8 @@ import com.thechance.weatherapp.weather_feature.domain.weather.model.HourlyWeath
 @Composable
 fun HourlyWeatherCard(
     hourlyWeather: HourlyWeatherData,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    isDay: Boolean
 ) {
     val blurColor = MaterialTheme.colorScheme.surfaceVariant
     val density = LocalDensity.current
@@ -68,7 +69,12 @@ fun HourlyWeatherCard(
                 )
 
                 Text(
-                    text = "${String.format("%02d", hourlyWeather.hour?.hour)}:${String.format("%02d", hourlyWeather.hour?.minute)}",
+                    text = "${
+                        String.format(
+                            "%02d",
+                            hourlyWeather.hour?.hour
+                        )
+                    }:${String.format("%02d", hourlyWeather.hour?.minute)}",
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = .6f)
                 )
@@ -76,20 +82,20 @@ fun HourlyWeatherCard(
         }
 
 
-            Image(
-                painter = painterResource(id = weatherConditionToImage(hourlyWeather.condition)),
-                contentDescription = hourlyWeather.condition,
-                contentScale = ContentScale.Fit,
-                modifier = Modifier
-                    .size(64.dp, 58.dp)
-                    .graphicsLayer {
-                        spotShadowColor = blurColor
-                        ambientShadowColor = blurColor
-                        shape = CircleShape
-                        shadowElevation = with(density) { 50.dp.toPx() }
-                    }
-                    .align(TopCenter)
-            )
+        Image(
+            painter = painterResource(id = weatherConditionToImage(hourlyWeather.condition, isDay)),
+            contentDescription = hourlyWeather.condition,
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .size(64.dp, 58.dp)
+                .graphicsLayer {
+                    spotShadowColor = blurColor
+                    ambientShadowColor = blurColor
+                    shape = CircleShape
+                    shadowElevation = with(density) { 50.dp.toPx() }
+                }
+                .align(TopCenter)
+        )
 
     }
 }

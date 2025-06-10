@@ -27,7 +27,7 @@ val dataModule = module {
 
     single { HttpClientFactory.create(CIO.create()) }
     singleOf(::RemoteWeatherDataSource)
-    single<WeatherRepository>{
+    single<WeatherRepository> {
         WeatherRepositoryImpl(get())
     }
 }

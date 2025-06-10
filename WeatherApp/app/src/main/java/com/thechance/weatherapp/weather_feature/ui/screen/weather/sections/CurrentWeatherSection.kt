@@ -40,7 +40,7 @@ fun CurrentWeatherSection(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            for (i in (currentWeatherAttributes.size / 2)..currentWeatherAttributes.size - 1 ) {
+            for (i in (currentWeatherAttributes.size / 2)..currentWeatherAttributes.size - 1) {
                 WeatherAttributeCard(
                     attribute = currentWeatherAttributes[i].attrName,
                     value = currentWeatherAttributes[i].attrValue,
