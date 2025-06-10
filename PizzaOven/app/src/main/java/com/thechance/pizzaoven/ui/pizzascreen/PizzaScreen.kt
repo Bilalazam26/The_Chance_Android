@@ -1,6 +1,7 @@
 package com.thechance.pizzaoven.ui.pizzascreen
 
 
+import androidx.compose.animation.Animatable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -108,9 +109,9 @@ fun PizzaScreen(modifier: Modifier = Modifier) {
 
     val animatedSize by animateDpAsState(
         targetValue = when (pizzaSize) {
-            0 -> plateSize - 72.dp
-            1 -> plateSize - 56.dp
-            else -> plateSize - 36.dp
+            0 -> plateSize - 78.dp
+            1 -> plateSize - 64.dp
+            else -> plateSize - 42.dp
         },
         animationSpec = tween(durationMillis = 500)
     )
@@ -165,7 +166,6 @@ fun PizzaScreen(modifier: Modifier = Modifier) {
                                 .fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
-
                             Image(
                                 painter = painterResource(id = breadImages[page]),
                                 contentDescription = "Pizza Bread",
