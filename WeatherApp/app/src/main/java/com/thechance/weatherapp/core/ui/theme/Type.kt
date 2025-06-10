@@ -12,7 +12,7 @@ import com.thechance.weatherapp.R
 val Typography = Typography(
     headlineLarge = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_semi_bold)
         ),
         fontWeight = FontWeight.SemiBold,
         fontSize = 64.sp,
@@ -21,7 +21,7 @@ val Typography = Typography(
     ),
     headlineSmall = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_semi_bold)
         ),
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
@@ -30,7 +30,7 @@ val Typography = Typography(
     ),
     titleLarge = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_medium)
         ),
         fontWeight = FontWeight.Medium,
         fontSize = 20.sp,
@@ -39,7 +39,7 @@ val Typography = Typography(
     ),
     titleMedium = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_medium)
         ),
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
@@ -48,7 +48,7 @@ val Typography = Typography(
     ),
     bodyLarge = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_medium)
         ),
         fontWeight = FontWeight.Medium,
         fontSize = 16.sp,
@@ -57,7 +57,7 @@ val Typography = Typography(
     ),
     bodyMedium = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_normal)
         ),
         fontWeight = FontWeight.Normal,
         fontSize = 16.sp,
@@ -66,7 +66,7 @@ val Typography = Typography(
     ),
     labelLarge = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_medium)
         ),
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp,
@@ -75,7 +75,7 @@ val Typography = Typography(
     ),
     labelMedium = TextStyle(
         fontFamily = FontFamily(
-            Font(R.font.urbanist)
+            Font(R.font.urbanist_normal)
         ),
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,

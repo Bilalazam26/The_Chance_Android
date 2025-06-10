@@ -8,18 +8,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.thechance.weatherapp.core.ui.themeswitch.components.NightSkyBackground
 import com.thechance.weatherapp.core.ui.theme.WeatherAppTheme
-import com.thechance.weatherapp.weather.ui.WeatherScreen
-import com.thechance.weatherapp.weather.ui.WeatherViewModel
+import com.thechance.weatherapp.weather_feature.ui.screen.weather.WeatherScreen
+import com.thechance.weatherapp.weather_feature.ui.screen.weather.WeatherViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -50,33 +44,14 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-            WeatherAppTheme {
+            WeatherAppTheme(
+                isNight = !viewModel.currentWeather.isDay
+            ) {
                 WeatherScreen(
                     modifier = Modifier.fillMaxSize()
                 )
             }
 
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Box(
-        modifier = modifier.fillMaxSize()
-    ) {
-        NightSkyBackground(
-            modifier = Modifier
-                .fillMaxSize()
-        )
-    }
-
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    WeatherAppTheme {
-        Greeting("Android")
     }
 }

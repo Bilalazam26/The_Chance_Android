@@ -1,7 +1,9 @@
 package com.thechance.weatherapp
 
 import android.app.Application
-import com.thechance.weatherapp.di.*
+import com.thechance.weatherapp.di.dataModule
+import com.thechance.weatherapp.di.domainModule
+import com.thechance.weatherapp.di.uiModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.GlobalContext.startKoin
 

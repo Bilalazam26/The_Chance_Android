@@ -1,5 +1,4 @@
 import java.util.Properties
-import kotlin.apply
 
 plugins {
     alias(libs.plugins.android.application)
@@ -78,4 +77,6 @@ dependencies {
     implementation(libs.bundles.koin)
     implementation(libs.bundles.ktor)
     implementation(libs.androidx.constraintlayout.compose)
+    implementation(libs.accompanist.swiperefresh)
+
 }
