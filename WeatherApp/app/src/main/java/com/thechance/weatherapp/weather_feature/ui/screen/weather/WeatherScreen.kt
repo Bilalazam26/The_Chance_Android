@@ -13,7 +13,9 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -38,6 +40,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -139,191 +142,204 @@ fun WeatherScreen(
                 .clipToBounds(),
             containerColor = MaterialTheme.colorScheme.background
         ) {
-            AnimatedVisibility(
-                visible = isLoading || isRefreshing,
-                enter = fadeIn() + expandVertically(),
-                exit = fadeOut() + shrinkVertically()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                MaterialTheme.colorScheme.background,
+                                MaterialTheme.colorScheme.surface
+                            )
+                        )
+                    )
             ) {
-                LinearProgressIndicator(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .systemBarsPadding()
-                        .padding(top = 2.dp)
-                        .height(8.dp),
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
-
-            if (isError) {
-                Toast.makeText(context, error, Toast.LENGTH_LONG).show()
-            }
-
-            if (!isLoading) {
-                ConstraintLayout(
-                    modifier = modifier
-                        .fillMaxWidth()
-                        .wrapContentHeight()
-                        .padding(it)
-                        .verticalScroll(scrollState)
-                        .clipToBounds(),
+                AnimatedVisibility(
+                    visible = isLoading || isRefreshing,
+                    enter = fadeIn() + expandVertically(),
+                    exit = fadeOut() + shrinkVertically()
                 ) {
-                    val (header, content) = createRefs()
-                    Column(
+                    LinearProgressIndicator(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(headerHeight)
-                            .constrainAs(header) {
-                                top.linkTo(parent.top)
-                                start.linkTo(parent.start)
-                                end.linkTo(parent.end)
-                            },
-                        horizontalAlignment = Alignment.CenterHorizontally
+                            .systemBarsPadding()
+                            .padding(top = 2.dp)
+                            .height(8.dp),
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                }
+
+                if (isError) {
+                    Toast.makeText(context, error, Toast.LENGTH_LONG).show()
+                }
+
+                if (!isLoading) {
+                    ConstraintLayout(
+                        modifier = modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                            .verticalScroll(scrollState)
+                            .clipToBounds(),
                     ) {
-                        Row(
+                        val (header, content) = createRefs()
+                        Column(
                             modifier = Modifier
-                                .padding(top = 24.dp)
-                                .height(24.dp),
-                            verticalAlignment = Alignment.CenterVertically,
-                            horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                .fillMaxWidth()
+                                .height(headerHeight)
+                                .constrainAs(header) {
+                                    top.linkTo(parent.top)
+                                    start.linkTo(parent.start)
+                                    end.linkTo(parent.end)
+                                },
+                            horizontalAlignment = Alignment.CenterHorizontally
                         ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.location_ic),
-                                contentDescription = "location",
-                                tint = MaterialTheme.colorScheme.onBackground
+                            Row(
+                                modifier = Modifier
+                                    .padding(top = 24.dp)
+                                    .height(24.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(4.dp)
+                            ) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.location_ic),
+                                    contentDescription = "location",
+                                    tint = MaterialTheme.colorScheme.onBackground
+                                )
+                                Text(
+                                    text = city,
+                                    modifier = Modifier,
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                            }
+
+                            Image(
+                                painter = painterResource(
+                                    id = weatherConditionToImage(
+                                        currentWeather.condition,
+                                        currentWeather.isDay
+                                    )
+                                ),
+                                contentDescription = currentWeather.condition,
+                                contentScale = ContentScale.Fit,
+                                modifier = Modifier
+                                    .width(imageWidth)
+                                    .height(imageHeight)
+                                    .padding(top = 12.dp)
+                                    .graphicsLayer {
+                                        translationX = imageOffsetX.toPx()
+                                        spotShadowColor = blurColor
+                                        ambientShadowColor = blurColor
+                                        shape = CircleShape
+                                        shadowElevation = with(density) { 150.dp.toPx() }
+                                    }
                             )
-                            Text(
-                                text = city,
-                                modifier = Modifier,
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onBackground
-                            )
+
+                            Column(
+                                modifier = Modifier
+                                    .width(168.dp)
+                                    .wrapContentHeight(unbounded = true)
+                                    .graphicsLayer {
+                                        translationX = infoOffsetX.toPx()
+                                    }
+                                    .offset(y = infoOffsetY),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {
+                                Text(
+                                    text = "${currentWeather.temperature.toInt()}°C",
+                                    style = MaterialTheme.typography.headlineLarge,
+                                    color = MaterialTheme.colorScheme.onSurface
+                                )
+
+                                Text(
+                                    text = currentWeather.condition,
+                                    style = MaterialTheme.typography.bodyLarge,
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = .6f),
+                                    modifier = Modifier.padding(bottom = 12.dp)
+                                )
+
+                                MinMaxTempContainer(
+                                    minTemp = dailyWeather.first().minTemperature,
+                                    maxTemp = dailyWeather.first().maxTemperature,
+                                    modifier = Modifier
+                                        .heightIn(max = 35.dp)
+                                )
+
+                            }
                         }
 
-                        Image(
-                            painter = painterResource(
-                                id = weatherConditionToImage(
-                                    currentWeather.condition,
-                                    currentWeather.isDay
-                                )
-                            ),
-                            contentDescription = currentWeather.condition,
-                            contentScale = ContentScale.Fit,
-                            modifier = Modifier
-                                .width(imageWidth)
-                                .height(imageHeight)
-                                .padding(top = 12.dp)
-                                .graphicsLayer {
-                                    translationX = imageOffsetX.toPx()
-                                    spotShadowColor = blurColor
-                                    ambientShadowColor = blurColor
-                                    shape = CircleShape
-                                    shadowElevation = with(density) { 150.dp.toPx() }
-                                }
-                        )
 
                         Column(
                             modifier = Modifier
-                                .width(168.dp)
-                                .wrapContentHeight(unbounded = true)
-                                .graphicsLayer {
-                                    translationX = infoOffsetX.toPx()
+                                .constrainAs(content) {
+                                    top.linkTo(header.bottom)
+                                    start.linkTo(parent.start)
+                                    end.linkTo(parent.end)
                                 }
-                                .offset(y = infoOffsetY),
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Text(
-                                text = "${currentWeather.temperature.toInt()}°C",
-                                style = MaterialTheme.typography.headlineLarge,
-                                color = MaterialTheme.colorScheme.onSurface
-                            )
-
-                            Text(
-                                text = currentWeather.condition,
-                                style = MaterialTheme.typography.bodyLarge,
-                                color = MaterialTheme.colorScheme.onSurface.copy(alpha = .6f),
-                                modifier = Modifier.padding(bottom = 12.dp)
-                            )
-
-                            MinMaxTempContainer(
-                                minTemp = dailyWeather.first().minTemperature,
-                                maxTemp = dailyWeather.first().maxTemperature,
-                                modifier = Modifier
-                                    .heightIn(max = 35.dp)
-                            )
-
-                        }
-                    }
-
-
-                    Column(
-                        modifier = Modifier
-                            .constrainAs(content) {
-                                top.linkTo(header.bottom)
-                                start.linkTo(parent.start)
-                                end.linkTo(parent.end)
-                            }
-                            .fillMaxWidth()
-                            .padding(bottom = 24.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.spacedBy(24.dp)
-                    ) {
-                        CurrentWeatherSection(
-                            currentWeatherAttributes = listOf<WeatherAttribute>(
-                                WeatherAttribute(
-                                    attrName = "Wind",
-                                    attrValue = "${currentWeather.windSpeed.toInt()}",
-                                    attrMeasureUnit = "km/h",
-                                    iconResource = R.drawable.wind_speed_ic
-                                ),
-                                WeatherAttribute(
-                                    attrName = "Humidity",
-                                    attrValue = "${currentWeather.humidity}",
-                                    attrMeasureUnit = "%",
-                                    iconResource = R.drawable.humidity_ic
-                                ),
-                                WeatherAttribute(
-                                    attrName = "Rain",
-                                    attrValue = "${currentWeather.rain.toInt()}",
-                                    attrMeasureUnit = "%",
-                                    iconResource = R.drawable.rain_ic
-                                ),
-                                WeatherAttribute(
-                                    attrName = "UV Index",
-                                    attrValue = "2",
-                                    attrMeasureUnit = "",
-                                    iconResource = R.drawable.uv_ic
-                                ),
-                                WeatherAttribute(
-                                    attrName = "Pressure",
-                                    attrValue = "${currentWeather.pressure.toInt()}",
-                                    attrMeasureUnit = "hPa",
-                                    iconResource = R.drawable.pressure_ic
-                                ),
-                                WeatherAttribute(
-                                    attrName = "Feels Like",
-                                    attrValue = "${currentWeather.feelsLike.toInt()}",
-                                    attrMeasureUnit = "°C",
-                                    iconResource = R.drawable.feels_like_ic
-                                )
-                            ),
-                            modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 12.dp)
-                        )
+                                .padding(bottom = 24.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(24.dp)
+                        ) {
+                            CurrentWeatherSection(
+                                currentWeatherAttributes = listOf<WeatherAttribute>(
+                                    WeatherAttribute(
+                                        attrName = "Wind",
+                                        attrValue = "${currentWeather.windSpeed.toInt()}",
+                                        attrMeasureUnit = "km/h",
+                                        iconResource = R.drawable.wind_speed_ic
+                                    ),
+                                    WeatherAttribute(
+                                        attrName = "Humidity",
+                                        attrValue = "${currentWeather.humidity}",
+                                        attrMeasureUnit = "%",
+                                        iconResource = R.drawable.humidity_ic
+                                    ),
+                                    WeatherAttribute(
+                                        attrName = "Rain",
+                                        attrValue = "${currentWeather.rain.toInt()}",
+                                        attrMeasureUnit = "%",
+                                        iconResource = R.drawable.rain_ic
+                                    ),
+                                    WeatherAttribute(
+                                        attrName = "UV Index",
+                                        attrValue = "2",
+                                        attrMeasureUnit = "",
+                                        iconResource = R.drawable.uv_ic
+                                    ),
+                                    WeatherAttribute(
+                                        attrName = "Pressure",
+                                        attrValue = "${currentWeather.pressure.toInt()}",
+                                        attrMeasureUnit = "hPa",
+                                        iconResource = R.drawable.pressure_ic
+                                    ),
+                                    WeatherAttribute(
+                                        attrName = "Feels Like",
+                                        attrValue = "${currentWeather.feelsLike.toInt()}",
+                                        attrMeasureUnit = "°C",
+                                        iconResource = R.drawable.feels_like_ic
+                                    )
+                                ),
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 12.dp)
+                            )
 
-                        TodayWeatherSection(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            todayWeather = hourlyWeather,
-                            isDay = currentWeather.isDay
-                        )
+                            TodayWeatherSection(
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                todayWeather = hourlyWeather,
+                                isDay = currentWeather.isDay
+                            )
 
-                        NextWeekWeatherSection(
-                            dailyWeather = dailyWeather,
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            isDay = currentWeather.isDay
-                        )
+                            NextWeekWeatherSection(
+                                dailyWeather = dailyWeather,
+                                modifier = Modifier
+                                    .fillMaxWidth(),
+                                isDay = currentWeather.isDay
+                            )
+                        }
                     }
                 }
             }

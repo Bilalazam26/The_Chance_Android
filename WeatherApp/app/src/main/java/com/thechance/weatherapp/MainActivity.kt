@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
             }
 
             WeatherAppTheme(
-                isNight = !viewModel.currentWeather.isDay
+                isNight = false
             ) {
                 WeatherScreen(
                     modifier = Modifier.fillMaxSize()
